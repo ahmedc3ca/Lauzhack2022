@@ -1,2 +1,4 @@
 # Lauzhack2022
- Lauzhack repo
+The Lauzhack 2022 repo.
+
+## the goal is to create an app that encourages sustainability on our campus!
