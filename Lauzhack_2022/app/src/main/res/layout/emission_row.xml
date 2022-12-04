@@ -34,6 +34,7 @@
                 tools:text="Item" />
 
             <TextView
+                android:gravity="right"
                 android:id="@+id/emission_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

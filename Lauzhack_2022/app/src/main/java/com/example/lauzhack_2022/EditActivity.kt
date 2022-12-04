@@ -1,24 +1,17 @@
 package com.example.lauzhack_2022
 
 
-import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Environment
-import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import com.example.lauzhack_2022.databinding.ActivityEditBinding
-import okhttp3.OkHttpClient
-import java.util.Base64.getEncoder
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
+import android.widget.Button
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.example.lauzhack_2022.Util.StorageManipulator
-import com.veryfi.android.VeryfiClientFactory
+import com.example.lauzhack_2022.databinding.ActivityEditBinding
 import okhttp3.*
 import java.io.*
 import java.util.*
@@ -56,7 +49,7 @@ class EditActivity : AppCompatActivity() {
         val resolver = contentResolver
         val stream = uri?.let { resolver.openInputStream(it) }
         if (stream != null) {
-            run("http://128.179.151.225:5000", stream)
+            run("http://128.179.144.71:5000", stream)
         }
 //        val myIntent = Intent(this, MainActivity::class.java)
 //        this.startActivity(myIntent)
@@ -86,8 +79,8 @@ class EditActivity : AppCompatActivity() {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.i("TAG", "hi")
-                throw e
+                ToastShow()
+                throw error(e)
             }
             override fun onResponse(call: Call, response: Response) {
                 response.body()?.string()?.let { Log.d(TAG,it); StartEmissionActivity(it) }
@@ -96,6 +89,15 @@ class EditActivity : AppCompatActivity() {
         })
     }
 
+    private fun ToastShow(){
+        // Get the application context
+        val context: Context = applicationContext
+        runOnUiThread {
+            val toast = Toast.makeText(context, "Please Take a better Picture!", Toast.LENGTH_SHORT)
+            toast.show()
+        }
+
+    }
     private fun StartEmissionActivity(json: String){
         val intent = Intent(this, EmissionsActivity::class.java)
         intent.putExtra("JSON", json)
