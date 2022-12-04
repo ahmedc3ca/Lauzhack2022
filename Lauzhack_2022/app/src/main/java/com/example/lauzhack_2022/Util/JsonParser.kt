@@ -19,7 +19,7 @@ class JsonParser {
             if (js == "") return null
             val gson = Gson()
             val savedClass = gson.fromJson(js, JsonParser.JsonClass::class.java)
-            return StorageEntry(LocalDate.parse(savedClass.date), savedClass.co2.map { e:JsonEntry -> Article(e.item.name, e.item.value) })
+            return StorageEntry(savedClass.date, savedClass.co2.map { e:JsonEntry -> Article(e.item.name, e.item.value) })
         }
     }
 

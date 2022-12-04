@@ -46,7 +46,8 @@ class StorageManipulator {
         }
 
         fun GetDayEmissions(storage: Storage, day: LocalDate): Double{
-            val i = storage.entries.map { entry -> entry.date }.indexOf(day);
+
+            val i = storage.entries.map { entry -> entry.date }.indexOf(day.toString());
             if(i == -1){
                 return  0.0
             }else{
@@ -61,7 +62,7 @@ class StorageManipulator {
 
 
         fun GetDayBest(storage: Storage, day: LocalDate):Pair<String, Double>{
-            val i = storage.entries.map { entry -> entry.date }.indexOf(day);
+            val i = storage.entries.map { entry -> entry.date }.indexOf(day.toString());
             if(i == -1) {
                 return Pair("N/A", 0.0)
             }else{
@@ -73,7 +74,7 @@ class StorageManipulator {
         }
 
         fun GetDayWorst(storage: Storage, day: LocalDate):Pair<String, Double>{
-            val i = storage.entries.map { entry -> entry.date }.indexOf(day);
+            val i = storage.entries.map { entry -> entry.date }.indexOf(day.toString());
             if(i == -1) {
                 return Pair("N/A", 0.0)
             }else{
