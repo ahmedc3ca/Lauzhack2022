@@ -30,7 +30,10 @@ class EmissionsActivity : AppCompatActivity() {
         recycler_view.layoutManager = LinearLayoutManager(this)
 
         // Adapter class is initialized and list is passed in the param.
-        val json : String = ""
+        var json : String? = intent.getStringExtra("JSON")
+        if(json == null){
+            json = ""
+        }
         val entry = JsonParser.JsonToStorageEntry(json)
         if(entry != null){
             var names = entry.articles.map { e -> e.name }

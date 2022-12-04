@@ -48,7 +48,7 @@ class StorageManipulator {
         fun GetDayEmissions(storage: Storage, day: LocalDate): Double{
             val i = storage.entries.map { entry -> entry.date }.indexOf(day);
             if(i == -1){
-                return  0 as Double
+                return  0.0
             }else{
                 return storage.entries.get(i).articles.map { a -> a.footprint }.sum()
             }
@@ -63,7 +63,7 @@ class StorageManipulator {
         fun GetDayBest(storage: Storage, day: LocalDate):Pair<String, Double>{
             val i = storage.entries.map { entry -> entry.date }.indexOf(day);
             if(i == -1) {
-                return Pair("N/A", 0 as Double)
+                return Pair("N/A", 0.0)
             }else{
                 val footprints = storage.entries.get(i).articles.map { a -> a.footprint }
                 val best = footprints.min()
@@ -75,7 +75,7 @@ class StorageManipulator {
         fun GetDayWorst(storage: Storage, day: LocalDate):Pair<String, Double>{
             val i = storage.entries.map { entry -> entry.date }.indexOf(day);
             if(i == -1) {
-                return Pair("N/A", 0 as Double)
+                return Pair("N/A", 0.0)
             }else{
                 val footprints = storage.entries.get(i).articles.map { a -> a.footprint }
                 val best = footprints.max()

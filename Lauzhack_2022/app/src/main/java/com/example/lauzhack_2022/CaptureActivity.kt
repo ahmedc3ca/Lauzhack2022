@@ -45,6 +45,7 @@ class CaptureActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         viewBinding = inflate(layoutInflater)
         setContentView(viewBinding.root)
 

@@ -31,7 +31,7 @@ class EditActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        supportActionBar?.hide()
         val binding = ActivityEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -90,14 +90,15 @@ class EditActivity : AppCompatActivity() {
                 throw e
             }
             override fun onResponse(call: Call, response: Response) {
-                response.body()?.string()?.let { StartEmissionActivity(it) }
+                response.body()?.string()?.let { Log.d(TAG,it); StartEmissionActivity(it) }
+//                response.body()?.string()?.let { Log.d(TAG,it) }
             }
         })
     }
 
     private fun StartEmissionActivity(json: String){
         val intent = Intent(this, EmissionsActivity::class.java)
-        intent.putExtra("DAY", json)
+        intent.putExtra("JSON", json)
         startActivity(intent)
     }
 

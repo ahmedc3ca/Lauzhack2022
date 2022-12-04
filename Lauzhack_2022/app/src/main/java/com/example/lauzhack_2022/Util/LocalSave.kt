@@ -2,6 +2,7 @@ package com.example.lauzhack_2022.Util
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.preference.PreferenceManager
 import com.google.gson.Gson
@@ -19,7 +20,7 @@ class LocalSave {
             // Retrieve the saved custom class
             val json = preferences.getString(KEY_CLASS, "")
             var savedClass = gson.fromJson(json, Storage::class.java)
-
+            Log.i("STORAGE", savedClass.toString())
             return savedClass
         }
 
@@ -41,6 +42,7 @@ class LocalSave {
                     storage.entries.get(i).articles = new_articles
                 }
             }
+            Log.i("STORAGE", "Storing: "+storage.toString())
             StoreStorage(context, storage)
         }
 
