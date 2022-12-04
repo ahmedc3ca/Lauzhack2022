@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val ahmedbutton = findViewById<Button>(R.id.ahmed_button)
         ahmedbutton.setOnClickListener {
-            val intent = Intent(this, DashboardActivity::class.java)
+            val intent = Intent(this, EmissionsActivity::class.java)
             startActivity(intent)
         }
     }

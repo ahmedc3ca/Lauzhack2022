@@ -1,7 +1,13 @@
 package com.example.lauzhack_2022
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.lauzhack_2022.Util.JsonParser
+import com.example.lauzhack_2022.Util.LocalSave
+import com.example.lauzhack_2022.Util.StorageManipulator
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.components.XAxis
@@ -9,9 +15,12 @@ import com.github.mikephil.charting.components.XAxis.XAxisPosition
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 
-
+@RequiresApi(Build.VERSION_CODES.O)
 class DashboardActivity : AppCompatActivity() {
 
     // on below line we are creating
@@ -32,6 +41,7 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+        supportActionBar?.hide()
         // on below line we are initializing
         // our variable with their ids.
         barChart = findViewById(R.id.chart)
@@ -93,20 +103,46 @@ class DashboardActivity : AppCompatActivity() {
         limitLine.textColor = R.color.kaki
         barChart.axisLeft.addLimitLine(limitLine)
 
+        barChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+            override fun onValueSelected(
+                e: Entry,
+                h: Highlight
+            ) {
+                // Handle the click event for the selected bar
+                StartDayActivity(e.x)
+            }
+
+            override fun onNothingSelected() {
+                // Do nothing
+            }
+        })
+
+
+    }
+
+    private fun StartDayActivity(day: Float){
+        val intent = Intent(this, DailyActivity::class.java)
+        intent.putExtra("DAY", StorageManipulator.GetWeekDay(day).toString())
+        startActivity(intent)
     }
 
     private fun getBarChartData() {
+        val storage = LocalSave.GetStorage(this)
+        var emissions:List<Double> = MutableList(10) { 0.0 }
+        if(storage != null){
+            emissions = StorageManipulator.GetWeekEmission(storage)
+        }
         barEntriesList = ArrayList()
 
         // on below line we are adding data
         // to our bar entries list
-        barEntriesList.add(BarEntry(0f, 1f))
-        barEntriesList.add(BarEntry(1f, 2f))
-        barEntriesList.add(BarEntry(2f, 3f))
-        barEntriesList.add(BarEntry(3f, 4f))
-        barEntriesList.add(BarEntry(4f, 5f))
-        barEntriesList.add(BarEntry(5f, 1f))
-        barEntriesList.add(BarEntry(6f, 2f))
+        barEntriesList.add(BarEntry(0f, emissions[0].toFloat()))
+        barEntriesList.add(BarEntry(1f, emissions[1].toFloat()))
+        barEntriesList.add(BarEntry(2f, emissions[2].toFloat()))
+        barEntriesList.add(BarEntry(3f, emissions[3].toFloat()))
+        barEntriesList.add(BarEntry(4f, emissions[4].toFloat()))
+        barEntriesList.add(BarEntry(5f, emissions[5].toFloat()))
+        barEntriesList.add(BarEntry(6f, emissions[6].toFloat()))
     }
 
 }

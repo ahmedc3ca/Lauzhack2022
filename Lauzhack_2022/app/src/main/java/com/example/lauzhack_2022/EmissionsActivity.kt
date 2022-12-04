@@ -1,14 +1,24 @@
 package com.example.lauzhack_2022
 
+import android.content.Intent
+import android.media.Image
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageButton
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lauzhack_2022.Util.JsonParser
+import com.example.lauzhack_2022.Util.LocalSave
 import com.example.lauzhack_2022.adapters.EmissionAdapter
 
 class EmissionsActivity : AppCompatActivity() {
 
     private lateinit var recycler_view: RecyclerView
+    private lateinit var dashboard_btn: ImageButton
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_emissions)
@@ -20,29 +30,23 @@ class EmissionsActivity : AppCompatActivity() {
         recycler_view.layoutManager = LinearLayoutManager(this)
 
         // Adapter class is initialized and list is passed in the param.
-        val productAdapter = EmissionAdapter(this, generateDummynames(), generateDummynums())
-
-        // adapter instance is set to the recyclerview to inflate the items.
-        recycler_view.adapter = productAdapter
-    }
-
-    private fun generateDummynames(): ArrayList<String> {
-        val list = ArrayList<String>()
-
-        for(i in 1..15){
-            list.add("Item $i")
+        val json : String = ""
+        val entry = JsonParser.JsonToStorageEntry(json)
+        if(entry != null){
+            var names = entry.articles.map { e -> e.name }
+            var footprints = entry.articles.map { e -> e.footprint }
+            val productAdapter = EmissionAdapter(this, names, footprints)
+            LocalSave.InsertEntry(entry, context = this)
+            // adapter instance is set to the recyclerview to inflate the items.
+            recycler_view.adapter = productAdapter
         }
 
-        return list
-    }
-
-    private fun generateDummynums(): ArrayList<Int> {
-        val list = ArrayList<Int>()
-
-        for(i in 1..15){
-            list.add(i)
+        dashboard_btn = findViewById(R.id.dashboard_button)
+        dashboard_btn.setOnClickListener {
+            val intent = Intent(this, DashboardActivity::class.java)
+            startActivity(intent)
         }
 
-        return list
     }
+
 }

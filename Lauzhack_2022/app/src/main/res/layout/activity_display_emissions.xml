@@ -49,20 +49,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="229dp"
-        android:layout_height="275dp"
-        android:layout_marginStart="296dp"
-
-        android:layout_marginTop="592dp"
-        android:src="@drawable/dashboard_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+    <ImageButton
+        android:id="@+id/dashboard_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="560dp"
+        android:background="#00FFFFFF"
+        android:scaleX="0.6"
+        android:scaleY="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:srcCompat="@drawable/dashboard_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

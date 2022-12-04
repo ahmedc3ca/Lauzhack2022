@@ -13,7 +13,7 @@ import com.example.lauzhack_2022.R
 import org.w3c.dom.Text
 
 
-class EmissionAdapter(val context: Context, val items: ArrayList<String>, val emissions: ArrayList<Int>) :
+class EmissionAdapter(val context: Context, val items: List<String>, val emissions: List<Double>) :
     RecyclerView.Adapter<EmissionAdapter.ViewHolder>() {
 
     /**
