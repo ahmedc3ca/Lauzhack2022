@@ -11,7 +11,7 @@ class JsonParser {
 
     data class JsonEntry(var item: JsonArticle)
 
-    data class JsonArticle(var name: String, var value: Double)
+    data class JsonArticle(var name: String, var value: Double, var prod_perc: Double)
 
     companion object{
         @RequiresApi(Build.VERSION_CODES.O)

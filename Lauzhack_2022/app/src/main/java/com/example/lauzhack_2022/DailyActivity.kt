@@ -45,9 +45,9 @@ class DailyActivity : AppCompatActivity() {
 
         day_text.text = day_string
         best_prod.text = best.first
-        best_foot.text = best.second.toString()
+        best_foot.text = best.second.toString() + " CO2eq"
         worst_prod.text = worst.first
-        worst_foot.text = worst.second.toString()
+        worst_foot.text = worst.second.toString() + " CO2eq"
 
         dashboard_btn = findViewById(R.id.dashboard_button)
         dashboard_btn.setOnClickListener {
