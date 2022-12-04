@@ -17,6 +17,7 @@ import android.util.Log
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.lauzhack_2022.Util.StorageManipulator
 import com.veryfi.android.VeryfiClientFactory
 import okhttp3.*
 import java.io.*
@@ -89,9 +90,17 @@ class EditActivity : AppCompatActivity() {
                 throw e
             }
             override fun onResponse(call: Call, response: Response) {
-                response.body()?.string()?.let { Log.i(TAG, it) }
+                response.body()?.string()?.let { StartEmissionActivity(it) }
             }
         })
     }
+
+    private fun StartEmissionActivity(json: String){
+        val intent = Intent(this, EmissionsActivity::class.java)
+        intent.putExtra("DAY", json)
+        startActivity(intent)
+    }
+
+
 
 }

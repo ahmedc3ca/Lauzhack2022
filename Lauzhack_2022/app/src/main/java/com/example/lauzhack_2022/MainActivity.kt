@@ -23,11 +23,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
 
-        val ahmedbutton = findViewById<Button>(R.id.ahmed_button)
-        ahmedbutton.setOnClickListener {
-            val intent = Intent(this, EmissionsActivity::class.java)
-            startActivity(intent)
-        }
 
 
         val toCamera = findViewById<Button>(R.id.camera_button)
