@@ -49,7 +49,7 @@ class EditActivity : AppCompatActivity() {
         val resolver = contentResolver
         val stream = uri?.let { resolver.openInputStream(it) }
         if (stream != null) {
-            run("http://128.179.144.71:5000", stream)
+            run("http://128.179.146.72:5000", stream)
         }
 //        val myIntent = Intent(this, MainActivity::class.java)
 //        this.startActivity(myIntent)

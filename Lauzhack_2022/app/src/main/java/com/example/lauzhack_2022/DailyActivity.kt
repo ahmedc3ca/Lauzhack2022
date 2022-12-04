@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.example.lauzhack_2022.Util.LocalSave
 import com.example.lauzhack_2022.Util.StorageManipulator
+import java.lang.Math.floor
 import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -46,11 +47,11 @@ class DailyActivity : AppCompatActivity() {
 
         day_text.text = day_string
         best_prod.text = best.name
-        best_foot.text = best.footprint.toString() + " CO2eq"
-        best_prod.text = best.prodperc.toString() + "% From Item Production"
+        best_foot.text = best.footprint.toString() + " g CO2eq/100g"
+        best_perc.text = floor(best.prodperc).toString() + "% From Item Production"
         worst_prod.text = worst.name
-        worst_foot.text = worst.footprint.toString() + " CO2eq"
-        worst_prod.text = worst.prodperc.toString() + "% From Item Production"
+        worst_foot.text = worst.footprint.toString() + "g CO2eq/100g"
+        worst_perc.text = floor(worst.prodperc).toString() + "% From Item Production"
 
 
         dashboard_btn = findViewById(R.id.dashboard_button)
