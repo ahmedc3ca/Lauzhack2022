@@ -61,27 +61,31 @@ class StorageManipulator {
         }
 
 
-        fun GetDayBest(storage: Storage, day: LocalDate):Pair<String, Double>{
+        fun GetDayBest(storage: Storage?, day: LocalDate):Article{
+            if(storage == null){
+                return Article("N/A", 0.0,0.0)
+            }
             val i = storage.entries.map { entry -> entry.date }.indexOf(day.toString());
             if(i == -1) {
-                return Pair("N/A", 0.0)
+                return Article("N/A", 0.0, 0.0)
             }else{
                 val footprints = storage.entries.get(i).articles.map { a -> a.footprint }
                 val best = footprints.min()
-                val name = storage.entries.get(i).articles.get(footprints.indexOf(best)).name
-                return Pair(name, best)
+                return storage.entries.get(i).articles.get(footprints.indexOf(best))
             }
         }
 
-        fun GetDayWorst(storage: Storage, day: LocalDate):Pair<String, Double>{
+        fun GetDayWorst(storage: Storage?, day: LocalDate):Article{
+            if(storage == null){
+                return Article("N/A", 0.0,0.0)
+            }
             val i = storage.entries.map { entry -> entry.date }.indexOf(day.toString());
             if(i == -1) {
-                return Pair("N/A", 0.0)
+                return Article("N/A", 0.0,0.0)
             }else{
                 val footprints = storage.entries.get(i).articles.map { a -> a.footprint }
                 val best = footprints.max()
-                val name = storage.entries.get(i).articles.get(footprints.indexOf(best)).name
-                return Pair(name, best)
+                return storage.entries.get(i).articles.get(footprints.indexOf(best))
             }
         }
 

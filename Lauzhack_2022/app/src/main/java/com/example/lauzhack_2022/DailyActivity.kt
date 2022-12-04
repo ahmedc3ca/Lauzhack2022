@@ -16,8 +16,10 @@ class DailyActivity : AppCompatActivity() {
 
     lateinit var best_prod: TextView
     lateinit var best_foot: TextView
+    lateinit var best_perc: TextView
     lateinit var worst_prod: TextView
     lateinit var worst_foot: TextView
+    lateinit var worst_perc: TextView
     lateinit var day_text: TextView
     lateinit var dashboard_btn: ImageButton
 
@@ -31,23 +33,25 @@ class DailyActivity : AppCompatActivity() {
 
         best_prod = findViewById(R.id.article1)
         best_foot = findViewById(R.id.footprint1)
+        best_perc = findViewById(R.id.percent1)
         worst_prod = findViewById(R.id.article2)
         worst_foot = findViewById(R.id.footprint2)
+        worst_perc = findViewById(R.id.percent2)
         day_text = findViewById(R.id.day)
+
         val storage = LocalSave.GetStorage(this)
 
-        var best = Pair("N/A", 0.0)
-        var worst = Pair("N/A", 0.0)
-        if(storage != null){
-            best = StorageManipulator.GetDayBest(storage, day)
-            worst = StorageManipulator.GetDayWorst(storage, day)
-        }
+        var best = StorageManipulator.GetDayBest(storage, day)
+        var worst = StorageManipulator.GetDayWorst(storage, day)
 
         day_text.text = day_string
-        best_prod.text = best.first
-        best_foot.text = best.second.toString() + " CO2eq"
-        worst_prod.text = worst.first
-        worst_foot.text = worst.second.toString() + " CO2eq"
+        best_prod.text = best.name
+        best_foot.text = best.footprint.toString() + " CO2eq"
+        best_prod.text = best.prodperc.toString() + "% From Item Production"
+        worst_prod.text = worst.name
+        worst_foot.text = worst.footprint.toString() + " CO2eq"
+        worst_prod.text = worst.prodperc.toString() + "% From Item Production"
+
 
         dashboard_btn = findViewById(R.id.dashboard_button)
         dashboard_btn.setOnClickListener {

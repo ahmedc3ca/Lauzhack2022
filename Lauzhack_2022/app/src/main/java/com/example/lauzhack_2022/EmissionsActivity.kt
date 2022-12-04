@@ -32,8 +32,8 @@ class EmissionsActivity : AppCompatActivity() {
 
         // Adapter class is initialized and list is passed in the param.
 
-        //var json : String? = intent.getStringExtra("JSON")
-        var json : String = "{\"co2\": [{\"item\": {\"name\": \"MBud Tranche de poulet\", \"value\": 447.58, \"prod_perc\": 97.16898071121807}}, {\"item\": {\"name\": \"6 Oeufs\", \"value\": 220.26, \"prod_perc\": 98.06592209207301}}, {\"item\": {\"name\": \"El Sombr. tortilla big\", \"value\": 100, \"prod_perc\": 87.65}}, {\"item\": {\"name\": \"Gingembre\", \"value\": 54.36, \"prod_perc\": 55.18763796909492}}, {\"item\": {\"name\": \"MClass MSC thon eau 6x\", \"value\": 413.87, \"prod_perc\": 86.98383550390218}}, {\"item\": {\"name\": \"Avocats mures\", \"value\": 93.38, \"prod_perc\": 58.149496680231316}}, {\"item\": {\"name\": \"Monster ultra 355ml\", \"value\": 170, \"prod_perc\": 81.23}}], \"date\": \"2022-12-04\"}"
+        var json : String? = intent.getStringExtra("JSON")
+        //var json : String = "{\"co2\": [{\"item\": {\"name\": \"MBud Tranche de poulet\", \"value\": 447.58, \"prod_perc\": 97.16898071121807}}, {\"item\": {\"name\": \"6 Oeufs\", \"value\": 220.26, \"prod_perc\": 98.06592209207301}}, {\"item\": {\"name\": \"El Sombr. tortilla big\", \"value\": 100, \"prod_perc\": 87.65}}, {\"item\": {\"name\": \"Gingembre\", \"value\": 54.36, \"prod_perc\": 55.18763796909492}}, {\"item\": {\"name\": \"MClass MSC thon eau 6x\", \"value\": 413.87, \"prod_perc\": 86.98383550390218}}, {\"item\": {\"name\": \"Avocats mures\", \"value\": 93.38, \"prod_perc\": 58.149496680231316}}, {\"item\": {\"name\": \"Monster ultra 355ml\", \"value\": 170, \"prod_perc\": 81.23}}], \"date\": \"2022-12-04\"}"
         if(json == null){
             json = ""
         }
