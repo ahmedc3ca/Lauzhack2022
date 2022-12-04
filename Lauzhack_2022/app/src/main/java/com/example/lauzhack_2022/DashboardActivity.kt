@@ -3,6 +3,7 @@ package com.example.lauzhack_2022
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lauzhack_2022.Util.JsonParser
@@ -38,6 +39,8 @@ class DashboardActivity : AppCompatActivity() {
     // on below line we are creating array list for bar data
     lateinit var barEntriesList: ArrayList<BarEntry>
 
+    lateinit var scan_btn: ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
@@ -45,10 +48,14 @@ class DashboardActivity : AppCompatActivity() {
         // on below line we are initializing
         // our variable with their ids.
         barChart = findViewById(R.id.chart)
-
+        scan_btn = findViewById(R.id.Scan_button)
+        scan_btn.setOnClickListener {
+            val myIntent = Intent(this, CaptureActivity::class.java)
+            this.startActivity(myIntent)
+        }
         // on below line we are calling get bar
         // chart data to add data to our array list
-        getBarChartData()
+        val avg = getBarChartData()
 
         // on below line we are initializing our bar data set
         barDataSet = BarDataSet(barEntriesList, "Bar Chart Data")
@@ -97,8 +104,8 @@ class DashboardActivity : AppCompatActivity() {
         }
         xAxis.setDrawAxisLine(false);
 
-        val average = 3f
-        val limitLine = LimitLine(average, "Average")
+
+        val limitLine = LimitLine(avg.toFloat(), "Average")
         limitLine.lineColor = R.color.kaki
         limitLine.textColor = R.color.kaki
         barChart.axisLeft.addLimitLine(limitLine)
@@ -126,12 +133,13 @@ class DashboardActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun getBarChartData() {
+    private fun getBarChartData():Double {
         val storage = LocalSave.GetStorage(this)
         var emissions:List<Double> = MutableList(10) { 0.0 }
         if(storage != null){
             emissions = StorageManipulator.GetWeekEmission(storage)
         }
+
         barEntriesList = ArrayList()
 
         // on below line we are adding data
@@ -143,6 +151,7 @@ class DashboardActivity : AppCompatActivity() {
         barEntriesList.add(BarEntry(4f, emissions[4].toFloat()))
         barEntriesList.add(BarEntry(5f, emissions[5].toFloat()))
         barEntriesList.add(BarEntry(6f, emissions[6].toFloat()))
+        return emissions.filter { e -> e!= 0.0 }.average()
     }
 
 }
